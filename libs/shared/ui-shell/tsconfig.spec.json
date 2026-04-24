@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../../dist/out-tsc",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es2016",
     "types": [
       "jest",
@@ -20,3 +20,4 @@
     "src/**/*.d.ts"
   ]
 }
+
