@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US">
+  <file id="ngi18n" original="ng.template">
+    <unit id="auth.title">
+      <notes>
+        <note category="location">libs/auth/feature-auth/src/lib/feature-auth/feature-auth.html:4,5</note>
+      </notes>
+      <segment>
+        <source>Sign in to continue</source>
+      </segment>
+    </unit>
+    <unit id="auth.button">
+      <notes>
+        <note category="location">libs/auth/feature-auth/src/lib/feature-auth/feature-auth.html:27,28</note>
+      </notes>
+      <segment>
+        <source>Sign in</source>
+      </segment>
+    </unit>
+    <unit id="shell.loginLink">
+      <notes>
+        <note category="location">libs/shared/ui-shell/src/lib/ui-shell/ui-shell.html:5,6</note>
+      </notes>
+      <segment>
+        <source>Login</source>
+      </segment>
+    </unit>
+    <unit id="shell.dashboardLink">
+      <notes>
+        <note category="location">libs/shared/ui-shell/src/lib/ui-shell/ui-shell.html:7,10</note>
+      </notes>
+      <segment>
+        <source> Dashboard </source>
+      </segment>
+    </unit>
+  </file>
+</xliff>

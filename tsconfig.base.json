@@ -1,0 +1,51 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "bundler",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "ignoreDeprecations": "5.0",
+    "paths": {
+      "@boilerplate/contracts": [
+        "./libs/shared/contracts/src/index.ts"
+      ],
+      "@boilerplate/app-config": [
+        "./libs/platform/app-config/src/index.ts"
+      ],
+      "@boilerplate/api-client-generated": [
+        "./libs/platform/api-client-generated/src/index.ts"
+      ],
+      "@boilerplate/api-client": [
+        "./libs/platform/api-client/src/index.ts"
+      ],
+      "@boilerplate/data-access-auth": [
+        "./libs/auth/data-access-auth/src/index.ts"
+      ],
+      "@boilerplate/feature-auth": [
+        "./libs/auth/feature-auth/src/index.ts"
+      ],
+      "@boilerplate/feature-dashboard": [
+        "./libs/dashboard/feature-dashboard/src/index.ts"
+      ],
+      "@boilerplate/ui-shell": [
+        "./libs/shared/ui-shell/src/index.ts"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
+}

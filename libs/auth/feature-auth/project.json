@@ -1,0 +1,26 @@
+{
+  "name": "feature-auth",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/auth/feature-auth/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [
+    "scope:auth",
+    "type:feature"
+  ],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/auth/feature-auth/jest.config.js",
+        "tsConfig": "libs/auth/feature-auth/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

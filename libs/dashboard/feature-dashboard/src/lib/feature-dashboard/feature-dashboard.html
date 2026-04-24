@@ -1,0 +1,27 @@
+<p>FeatureDashboard works!</p>
+<section class="dashboard-grid">
+  <mat-card class="hero-card">
+    <h1>Operational Dashboard</h1>
+    <p>
+      Welcome back, <strong>{{ displayName() }}</strong>.
+    </p>
+    <button mat-stroked-button color="primary" type="button" (click)="logout()">
+      Sign out
+    </button>
+  </mat-card>
+
+  <mat-card>
+    <h2>Service Health</h2>
+    <p>All critical APIs are responding below 250ms p95.</p>
+  </mat-card>
+
+  <mat-card>
+    <h2>Delivery Metrics</h2>
+    <p>Release cadence: 6 deployments in the last 14 days.</p>
+  </mat-card>
+
+  <mat-card>
+    <h2>Security</h2>
+    <p>No unresolved production security incidents.</p>
+  </mat-card>
+</section>

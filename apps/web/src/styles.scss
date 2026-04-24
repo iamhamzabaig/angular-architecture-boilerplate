@@ -1,0 +1,43 @@
+@use '@angular/material' as mat;
+
+$primary: mat.m2-define-palette(mat.$m2-cyan-palette, 700, 500, 900);
+$accent: mat.m2-define-palette(mat.$m2-blue-gray-palette, 500, 300, 700);
+$warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$theme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+    ),
+    typography: mat.m2-define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.core();
+@include mat.all-component-themes($theme);
+
+:root {
+  --app-background: radial-gradient(circle at 0% 0%, #e8f8ff 0%, #f7fbfd 40%, #ffffff 100%);
+  --app-surface: #ffffff;
+  --app-surface-border: #d6e5ee;
+  --app-muted: #4c6777;
+  --app-text: #132634;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--app-text);
+  background: var(--app-background);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

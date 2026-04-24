@@ -1,0 +1,15 @@
+{
+  "name": "api-client-generated",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/platform/api-client-generated/src",
+  "projectType": "library",
+  "tags": [
+    "scope:platform",
+    "type:generated"
+  ],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+.shell-toolbar {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--app-surface-border);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.shell-brand {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.shell-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.shell-nav .active {
+  font-weight: 700;
+}
+
+.shell-content {
+  width: min(1120px, 92vw);
+  margin: 24px auto;
+}

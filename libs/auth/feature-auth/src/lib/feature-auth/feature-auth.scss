@@ -1,0 +1,42 @@
+:host {
+  display: block;
+}
+
+.auth-layout {
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - 140px);
+}
+
+.auth-card {
+  width: min(420px, 92vw);
+  padding: 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.helper-text {
+  margin-top: 8px;
+  margin-bottom: 20px;
+  color: var(--app-muted);
+}
+
+form {
+  display: grid;
+  gap: 12px;
+}
+
+button[type='submit'] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.error-text {
+  margin-top: 14px;
+  color: #b00020;
+}

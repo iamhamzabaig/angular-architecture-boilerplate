@@ -1,0 +1,14 @@
+<p>UiShell works!</p>
+<mat-toolbar class="shell-toolbar">
+  <div class="shell-brand">{{ title() }}</div>
+  <nav class="shell-nav">
+    <a mat-button routerLink="/login" routerLinkActive="active" i18n="@@shell.loginLink">Login</a>
+    <a mat-button routerLink="/dashboard" routerLinkActive="active" i18n="@@shell.dashboardLink">
+      Dashboard
+    </a>
+  </nav>
+</mat-toolbar>
+
+<main class="shell-content">
+  <ng-content />
+</main>
