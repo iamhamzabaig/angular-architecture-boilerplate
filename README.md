@@ -2,53 +2,82 @@
 
 [![CI](https://github.com/iamhamzabaig/angular-architecture-boilerplate/actions/workflows/ci.yml/badge.svg)](https://github.com/iamhamzabaig/angular-architecture-boilerplate/actions/workflows/ci.yml)
 [![Release](https://github.com/iamhamzabaig/angular-architecture-boilerplate/actions/workflows/release.yml/badge.svg)](https://github.com/iamhamzabaig/angular-architecture-boilerplate/actions/workflows/release.yml)
-![Angular](https://img.shields.io/badge/angular-19.x-red)
-![Nx](https://img.shields.io/badge/nx-22.x-143055)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Angular](https://img.shields.io/badge/Angular-19.x-DD0031?logo=angular&logoColor=white)
+![Nx](https://img.shields.io/badge/Nx-22.x-143055?logo=nx&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-2ea44f)
 
-Enterprise-ready Angular monorepo template for medium to large applications, built with Nx and designed for scalable feature development, strict boundaries, and CI-first delivery.
+A production-oriented Angular monorepo starter for medium and large applications. It combines Nx project boundaries, standalone Angular architecture, OpenAPI contract generation, i18n, CI quality gates, and semantic-release into one maintainable baseline.
 
-## Overview
+## Why This Exists
 
-This repository provides:
+Modern Angular applications need more than a generated app shell. This repository provides a scalable structure for teams that want clear ownership, predictable dependency direction, testable feature slices, and automation-ready delivery from day one.
 
-- Angular 19 standalone-first application architecture
-- Nx integrated workspace with enforced module boundaries
-- Domain-oriented library segmentation
-- Angular Material baseline UI + app shell
-- OpenAPI-driven contract generation pipeline
-- Built-in i18n workflow (`en-US` source, `fr` example)
-- Automated quality gates and semantic-release pipeline
+## What Is Included
 
-## Technology Baseline
+- Angular 19 standalone-first application setup
+- Nx 22 integrated monorepo with cached tasks and affected checks
+- Domain/layer library organization with enforced boundaries
+- Angular Material application shell baseline
+- Jest unit tests and Playwright end-to-end tests
+- OpenAPI-driven typed client generation
+- Angular i18n workflow with `en-US` source and `fr` example locale
+- GitHub Actions CI and semantic-release configuration
 
-- Angular `~19.2.x`
-- Nx `22.x`
-- TypeScript `~5.8.x`
-- Jest (`jest-preset-angular`) for unit tests
-- Playwright for end-to-end tests
-- ESLint + angular-eslint
+## Tech Stack
 
-## Getting Started
+| Area | Tooling |
+| --- | --- |
+| Framework | Angular `~19.2.x` |
+| Workspace | Nx `22.x` |
+| Language | TypeScript `~5.8.x` |
+| Styling | SCSS, Angular Material |
+| Unit tests | Jest, `jest-preset-angular` |
+| E2E tests | Playwright |
+| Quality | ESLint, angular-eslint, Prettier |
+| Release | semantic-release |
+
+## Quick Start
 
 ### Prerequisites
 
-- Node.js 20 or newer
-- npm 10 or newer
+- Node.js 20+
+- npm 10+
 
-### Install Dependencies
+### Install
 
 ```sh
 npm ci
 ```
 
-### Start Development Server
+### Run Locally
 
 ```sh
 npm start
 ```
 
-Application URL: `http://localhost:4200`
+Open `http://localhost:4200`.
+
+### Optional E2E Browser Setup
+
+```sh
+npx playwright install chromium firefox webkit
+```
+
+## Common Commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm start` | Serve the `web` app in development mode. |
+| `npm run build` | Build the production `web` app. |
+| `npm run build:fr` | Build the French localized app bundle. |
+| `npm run lint` | Run ESLint across workspace projects. |
+| `npm test` | Run Jest unit tests across workspace projects. |
+| `npm run e2e` | Run the Playwright suite for `web-e2e`. |
+| `npm run affected:ci` | Run affected lint, test, and build targets against `origin/main`. |
+| `npm run generate:api` | Regenerate OpenAPI client artifacts. |
+| `npm run i18n:extract` | Extract Angular translation messages. |
+| `npm run release` | Execute semantic-release. |
 
 ## Workspace Layout
 
@@ -59,104 +88,92 @@ apps/
 
 libs/
   auth/
-    data-access-auth/        # Auth session, guard, interceptor
+    data-access-auth/        # Auth state, guard, interceptor
     feature-auth/            # Login feature UI
   dashboard/
     feature-dashboard/       # Protected dashboard feature UI
   platform/
-    app-config/              # Environment and app-level config token
+    app-config/              # Environment and app-level configuration
     api-client/              # Hand-authored API adapters
-    api-client-generated/    # Generated OpenAPI models
+    api-client-generated/    # Generated OpenAPI models and services
   shared/
     contracts/               # Shared DTO and contract types
-    ui-shell/                # Shared application shell components
+    ui-shell/                # Shared application shell UI
 
 openapi/
-  specs/core-api.yaml        # OpenAPI source definition
+  specs/core-api.yaml        # API contract source of truth
 
 tools/
-  openapi/generate.mjs       # OpenAPI generation script
+  openapi/generate.mjs       # API generation script
 ```
 
-## Documentation
+## Architecture Principles
 
-- Architecture guide: `docs/architecture.md`
-- Contribution guide: `CONTRIBUTING.md`
+The application is organized around explicit domain and layer boundaries. Application bootstrap and route composition stay in `apps/web`. Feature UI belongs in `feature-*` libraries. API orchestration, guards, interceptors, and session state belong in `data-access-*` or `platform` libraries. Shared contracts and shell UI live under `libs/shared`.
 
-## Architectural Conventions
+Nx enforces this through tags in `eslint.config.mjs`:
 
-Module boundaries are enforced in `eslint.config.mjs` via Nx tags:
+- `scope:*` controls domain ownership, such as `scope:auth`, `scope:dashboard`, `scope:platform`, `scope:shared`, and `scope:web`.
+- `type:*` controls layer direction, such as `type:feature`, `type:data-access`, `type:ui`, `type:contracts`, and `type:generated`.
 
-- `scope:*` for ownership and domain boundaries (`scope:auth`, `scope:dashboard`, `scope:platform`, `scope:shared`, `scope:web`)
-- `type:*` for layer boundaries (`type:feature`, `type:data-access`, `type:ui`, `type:util`, `type:contracts`, `type:generated`)
+If a boundary rule blocks an import, move the code to the correct layer instead of disabling the lint rule.
 
-These constraints prevent accidental coupling and maintain clear dependency direction as the codebase grows.
-
-## Common Commands
-
-- `npm start` - run the `web` app in development mode
-- `npm run build` - production build of `web`
-- `npm run build:fr` - localized French production build
-- `npm run lint` - lint all projects
-- `npm run test` - run all unit tests
-- `npm run e2e` - run Playwright suite (`web-e2e`)
-- `npm run affected:ci` - affected lint/test/build for PR validation
-- `npm run generate:api` - regenerate OpenAPI artifacts
-- `npm run i18n:extract` - extract translatable messages
-- `npm run release` - semantic-release execution
+See [`docs/architecture.md`](docs/architecture.md) for dependency rules and request-flow details.
 
 ## API Contract Workflow
 
-OpenAPI source of truth:
-
-- `openapi/specs/core-api.yaml`
-
-Generate typed models:
+`openapi/specs/core-api.yaml` is the API source of truth. After changing the contract, regenerate the client:
 
 ```sh
 npm run generate:api
 ```
 
-Generated output location:
-
-- `libs/platform/api-client-generated/src/lib/generated`
+Generated code is written under `libs/platform/api-client-generated`. Keep hand-authored mapping and adapter logic in `libs/platform/api-client`.
 
 ## Localization Workflow
 
-- Source locale: `en-US`
-- Example translated locale: `fr`
-
-Translation files:
-
-- `apps/web/src/locale/messages.xlf`
-- `apps/web/src/locale/messages.fr.xlf`
-
-Extract and build localized bundle:
+The source locale is `en-US`; the example translated locale is `fr`.
 
 ```sh
 npm run i18n:extract
 npm run build:fr
 ```
 
-## CI/CD and Release
+Translation files live in `apps/web/src/locale`, including `messages.xlf` and `messages.fr.xlf`.
 
-- CI: `.github/workflows/ci.yml`
-  - Runs affected lint/test/build checks on pull requests and `main`
-- Release: `.github/workflows/release.yml`
-  - Executes semantic-release on `main`
-- Release policy/config: `.releaserc.json`
+## Quality Gates
+
+Before opening a pull request, run the checks that match your change:
+
+```sh
+npm run lint
+npm test
+npm run build
+npm run e2e
+```
+
+For pull-request scoped validation, use:
+
+```sh
+npm run affected:ci
+```
+
+CI runs affected lint, test, and build targets on pull requests and pushes to `main`. The release workflow runs full verification before semantic-release.
+
+## Documentation
+
+- [Architecture Guide](docs/architecture.md)
+- [Contributing Guide](CONTRIBUTING.md)
+- [Agent Contributor Guide](AGENTS.md)
 
 ## Troubleshooting
 
-- If Playwright browsers are missing:
+| Issue | Fix |
+| --- | --- |
+| Playwright browsers are missing | Run `npx playwright install chromium firefox webkit`. |
+| TypeScript diagnostics differ between editor and CLI | Use workspace TypeScript and restart the VS Code TS server. |
+| Port `4200` is already in use | Run `npx nx run web:serve -- --port=4300`. |
 
-```sh
-npx playwright install chromium firefox webkit
-```
+## License
 
-- If editor TypeScript diagnostics differ from CLI:
-  - Use workspace TypeScript (configured in `.vscode/settings.json`)
-  - Restart TS server in VS Code
-
-- If port `4200` is occupied:
-  - Run app on another port: `npx nx run web:serve -- --port=4300`
+MIT. See [LICENSE](LICENSE).
